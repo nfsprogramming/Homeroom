@@ -1,0 +1,125 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: #f3efe6;
+  --color-background-wash: #ebe4d6;
+  --color-foreground: #1a1814;
+  --color-card: #fbf8f1;
+  --color-card-foreground: #1a1814;
+  --color-muted: #ebe4d6;
+  --color-muted-foreground: #6f6a60;
+  --color-subtle: #9a9488;
+  --color-primary: #234e45;
+  --color-primary-foreground: #f6f3ea;
+  --color-secondary: #e8e0d0;
+  --color-secondary-foreground: #1a1814;
+  --color-border: #ddd4c4;
+  --color-ring: #234e45;
+  --color-sidebar: #16201e;
+  --color-sidebar-foreground: #ece6d8;
+  --color-sidebar-muted: #8b9a94;
+  --color-sidebar-hover: #1e2c29;
+  --color-present: #1f6a4c;
+  --color-present-foreground: #f3efe6;
+  --color-late: #9a5b12;
+  --color-late-foreground: #fdf6ec;
+  --color-absent: #8f2d32;
+  --color-absent-foreground: #fdf6f4;
+  --color-excused: #5c574e;
+  --color-excused-foreground: #f3efe6;
+  --color-accent-teal: #234e45;
+  --color-accent-olive: #4a5c49;
+  --color-accent-ink: #3f3a34;
+
+  --font-sans: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  --shadow-border:
+    0px 0px 0px 1px rgb(26 24 20 / 0.06),
+    0px 1px 2px -1px rgb(26 24 20 / 0.06),
+    0px 2px 4px 0px rgb(26 24 20 / 0.04);
+  --shadow-border-hover:
+    0px 0px 0px 1px rgb(26 24 20 / 0.08),
+    0px 1px 2px -1px rgb(26 24 20 / 0.08),
+    0px 2px 4px 0px rgb(26 24 20 / 0.06);
+
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image: linear-gradient(
+      180deg,
+      var(--color-background) 0%,
+      var(--color-background-wash) 100%
+    );
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-primary) 18%, transparent);
+  }
+}
+
+@layer components {
+  .pressable {
+    transition-property: scale, background-color, color, box-shadow, border-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-out);
+  }
+  .pressable:active:not(:disabled) {
+    scale: 0.96;
+  }
+
+  .surface-card {
+    background-color: var(--color-card);
+    color: var(--color-card-foreground);
+    box-shadow: var(--shadow-border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
